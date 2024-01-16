@@ -1,0 +1,18 @@
+====================
+Third Party Licenses
+====================
+
+-------------------------------------------------------------------------
+Overview
+--------------------------------------------------------------------------
+
+ControlNet: https://github.com/lllyasviel/ControlNet
+License: Apache-2.0 license 
+
+
+CSAILVision/semantic-segmentation-pytorch: https://github.com/CSAILVision/semantic-segmentation-pytorch
+License: BSD-3
+
+yuval-alaluf/Attend-and-Excite
+https://github.com/yuval-alaluf/Attend-and-Excite
+License: MIT license 
