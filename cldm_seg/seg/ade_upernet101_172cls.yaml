@@ -1,0 +1,17 @@
+model:
+    type: mit_semseg
+    encoder_arch: "resnet101"  # encoder architecture and weights
+    encoder_weights: "/fs/scratch/rng_cr_bcai_dl/lyu7rng/0_project_large_models/pretrained/ade20k_semseg/upernet101/encoder_epoch_50.pth"
+    decoder_arch: "upernet"    # decoder architecture and weights
+    decoder_weights: "/fs/scratch/rng_cr_bcai_dl/lyu7rng/0_project_large_models/pretrained/ade20k_semseg/upernet101/decoder_epoch_50_172cls.pth"
+    fc_dim: 2048               # feature dimension of encoder + decoder
+    decoder_classes: 172       # number of decoder classes
+
+dataset:
+  num_class: 150
+  imgSizes: (300, 375, 450, 525, 600)
+  imgMaxSize: 1000
+  padding_constant: 32
+  segm_downsampling_rate: 4
+  random_flip: False
+

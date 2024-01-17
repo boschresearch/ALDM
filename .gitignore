@@ -1,2 +1,6 @@
 
 .ipynb_checkpoints
+.ckpt
+.idea
+__pycache__
+image_output
