@@ -1,3 +1,4 @@
+
 # Adversarial Supervision Makes Layout-to-Image Diffusion Models Thrive (ALDM)   
 
 :fire:  Official implementation of "Adversarial Supervision Makes Layout-to-Image Diffusion Models Thrive" (ICLR 2024)
@@ -5,8 +6,11 @@
 [![Static Badge](https://img.shields.io/badge/Project_Page-ALDM-blue)](https://yumengli007.github.io/ALDM) [![Static Badge](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Model-Green)
 ](https://huggingface.co/Yumeng/ALDM/tree/main)
 
-![overview](docs/overview.png)
+![overview](docs/overview.jpg)
 ![result](docs/result.png)
+
+
+<br />
 
 
 ## Getting Started
@@ -62,7 +66,9 @@ We provide three ways for testing: (1) [JupyterNotebook](demo_generation.ipynb),
 	```
 	![demo](docs/gradio_demo.png)
 
-3. [Bash scripts](bash_script): we provide some bash scripts to enable large scale generation for the whole dataset. The synthesized data can be further used for training downstream models, e.g., semantic segmentation networks.
+<br />
+
+4. [Bash scripts](bash_script): we provide some bash scripts to enable large scale generation for the whole dataset. The synthesized data can be further used for training downstream models, e.g., semantic segmentation networks.
 
 
 ## Citation
