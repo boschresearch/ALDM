@@ -68,7 +68,7 @@ We provide three ways for testing: (1) [JupyterNotebook](demo_generation.ipynb),
 
 <br />
 
-4. [Bash scripts](bash_script): we provide some bash scripts to enable large scale generation for the whole dataset. The synthesized data can be further used for training downstream models, e.g., semantic segmentation networks.
+3. [Bash scripts](bash_script): we provide some bash scripts to enable large scale generation for the whole dataset. The synthesized data can be further used for training downstream models, e.g., semantic segmentation networks.
 
 
 ## Citation
