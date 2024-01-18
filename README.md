@@ -3,7 +3,7 @@
 
 :fire:  Official implementation of "Adversarial Supervision Makes Layout-to-Image Diffusion Models Thrive" (ICLR 2024)
 
-[![Static Badge](https://img.shields.io/badge/Project_Page-ALDM-blue)](https://yumengli007.github.io/ALDM) [![Static Badge](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Model-Green)
+[![arXiv](https://img.shields.io/badge/arXiv-2401.08815-red)](https://arxiv.org/pdf/2401.08815.pdf) [![Static Badge](https://img.shields.io/badge/Project_Page-ALDM-blue)](https://yumengli007.github.io/ALDM) [![Static Badge](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Model-Green)
 ](https://huggingface.co/Yumeng/ALDM/tree/main)
 
 ![overview](docs/overview.jpg)
@@ -28,7 +28,7 @@ Pretrained models can be downloaded from [here](https://huggingface.co/Yumeng/AL
 
 ## Dataset Preparation
 
-Datasets should be structured as follows to enable ALDM training. Dataset path should be adjusted accordingly in [dataloader/cityscapes.py](dataloader/cityscapes.py) and [dataloader/ade20k.py](dataloader/ade20k.py).
+Datasets should be structured as follows to enable ALDM training. Dataset path should be adjusted accordingly in [dataloader/cityscapes.py](https://github.com/boschresearch/ALDM/blob/3edbad80eaf208eacd0eb4a161a4998a0c75fb50/dataloader/cityscapes.py#L151-L152) and [dataloader/ade20k.py](https://github.com/boschresearch/ALDM/blob/3edbad80eaf208eacd0eb4a161a4998a0c75fb50/dataloader/ade20k.py#L144-L145).
 
 <details>
   <summary>Click to expand</summary>
