@@ -23,7 +23,7 @@ pip install mit-semseg # for segmentation network UperNet
 ```
 
 ## Pretrained Models
-Pretrained models can be downloaded from [here](https://huggingface.co/Yumeng/ALDM/tree/main) and saved in ```./checkpoint```
+Pretrained models [ade20k_step9.ckpt](https://huggingface.co/Yumeng/ALDM/blob/main/ade20k_step9.ckpt) and [cityscapes_step9.ckpt](https://huggingface.co/Yumeng/ALDM/blob/main/cityscapes_step9.ckpt)  can be downloaded from [here](https://huggingface.co/Yumeng/ALDM/tree/main). They should be stored in the [checkpoint](checkpoint) folder.
 
 
 ## Dataset Preparation
