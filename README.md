@@ -1,4 +1,5 @@
 
+
 # Adversarial Supervision Makes Layout-to-Image Diffusion Models Thrive (ALDM)   
 
 :fire:  Official implementation of "Adversarial Supervision Makes Layout-to-Image Diffusion Models Thrive" (ICLR 2024)
@@ -72,7 +73,7 @@ We provide three ways for testing: (1) [JupyterNotebook](demo_generation.ipynb),
 
 
 ## Citation
-If you find our work useful, please star 🌟 this repo and cite: 
+If you find our work useful, please star  this repo and cite: 
 
 ```
 @inproceedings{li2024aldm,
@@ -95,11 +96,11 @@ file [3rd-party-licenses.txt](3rd-party-licenses.txt).
 ## Purpose of the project
 
 This software is a research prototype, solely developed for and published as
-part of the publication cited above. It will neither be
-maintained nor monitored in any way.
+part of the publication cited above. 
 
 
-## Contact
+## Contact     
+
 Please feel free to open an issue or contact personally if you have questions, need help, or need explanations. Don't hesitate to write an email to the following email address:
 liyumeng07@outlook.com
 

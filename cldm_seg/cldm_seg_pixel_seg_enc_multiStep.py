@@ -936,47 +936,6 @@ class ControlLDM(LatentDiffusion):
         label_pred = self.segmenter.forward_pred_label(img, batch['label'])
         return label_pred  # [bs, h, w]
 
-    # @torch.no_grad()  # TODO: no use!
-    # def apply_model_with_seg(self, x_noisy, t, cond, use_text_adapter=True,
-    #                          use_hint_condition=True,
-    #                          *args, **kwargs):
-    #     '''
-    #     For hacked DDIM_sampler_seg
-    #     '''
-    #     # main func to get the model prediction & features for segmentation
-    #     model_output, feat_list = self.apply_model(
-    #         x_noisy, t, cond,
-    #         use_text_adapter=use_text_adapter,
-    #         use_hint_condition=use_hint_condition,
-    #         return_feats=True,
-    #     )
-    #     # if self.use_time_segmenter:
-    #     #     time_embedding = self.segmenter.extract_time_embedding(t)[:, :, None, None]
-    #     #     feat_list = [torch.cat([k, time_embedding.repeat(1, 1, k.shape[-2], k.shape[-1])], dim=1) for k in
-    #     #                  feat_list]
-    #     h, w = x_noisy.shape[2:]
-    #     img_meta = {
-    #         'ori_shape': (h * 8, w * 8),
-    #     }
-    #     label_pred = self.segmenter.simple_test(None, img_meta=[img_meta], rescale=True, features=feat_list)
-    #     out = self.label_color_map[label_pred]  # [bs, h, w] -> [bs, h, w, 3]
-    #     # out = rearrange(out, 'bs h w c -> bs c h w')
-    #     # out = (torch.from_numpy(out) / 255.0) * 2.0 - 1.0
-    #     return out  # [bs, h, w, 3] # (0-255) numpy
-    #
-    #
-    # @torch.no_grad()
-    # def apply_seg_on_image(self, x, label=None, no_fake_cls=False, *args, **kwargs):
-    #     label_pred = self.segmenter.forward_pred_label(x, label) # [bs, h, w]
-    #     # out = self.label_to_seg_map(label_pred)  # [bs, h, w] -> [bs, 3, h, w] #  # (-1,1)
-    #     out = self.label_color_map[label_pred.cpu()]  # [bs, h, w, 3]
-    #     #out = rearrange(out, 'bs h w c -> bs c h w') # [0-255]
-    #     # out = rearrange(out, 'bs h w c -> bs c h w')
-    #     # out = (torch.from_numpy(out) / 255.0) * 2.0 - 1.0
-    #     out = out.clip(0, 255).astype(np.uint8)
-    #     return out  # [bs, h, w, 3] # numpy
-
-
     def low_vram_shift(self, is_diffusing):
         if is_diffusing:
             self.model = self.model.cuda()
