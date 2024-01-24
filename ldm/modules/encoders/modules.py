@@ -92,8 +92,7 @@ class FrozenCLIPEmbedder(AbstractEncoder):
         "pooled",
         "hidden"
     ]
-    # version = "openai/clip-vit-large-patch14"
-    def __init__(self, version="/fs/scratch/rng_cr_bcai_dl/lyu7rng/0_project_large_models/pretrained/clip-vit-large-patch14",
+    def __init__(self, version="openai/clip-vit-large-patch14",
                  device="cuda", max_length=77,
                  freeze=True, layer="last", layer_idx=None):  # clip-vit-base-patch32
         super().__init__()
