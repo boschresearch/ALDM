@@ -30,16 +30,26 @@ def get_segmentation_model(model_config: OmegaConf) -> nn.Module:
     """
     model = None
     if model_config.type == "mit_semseg":
+        if os.path.isfile(model_config.encoder_weights):
+            encoder_weights = model_config.encoder_weights
+        else:
+            encoder_weights = ''
+
+        if os.path.isfile(model_config.decoder_weights):
+            decoder_weights = model_config.decoder_weights
+        else:
+            decoder_weights = ''
+
         net_encoder = ModelBuilder.build_encoder(
             arch=model_config.encoder_arch.lower(),
             fc_dim=model_config.fc_dim,
-            weights=model_config.encoder_weights,
+            weights=encoder_weights,
         )
         net_decoder = ModelBuilder.build_decoder(
             arch=model_config.decoder_arch.lower(),
             fc_dim=model_config.fc_dim,
             num_class=model_config.decoder_classes,
-            weights=model_config.decoder_weights, # []
+            weights=decoder_weights, # []
             use_softmax=False,
         )
         crit = nn.NLLLoss(reduction='none', ignore_index=255)  # nn.CrossEntropyLoss(ignore_index=255)
