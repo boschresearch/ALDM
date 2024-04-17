@@ -1,5 +1,6 @@
 
 
+
 # Adversarial Supervision Makes Layout-to-Image Diffusion Models Thrive (ALDM)   
 
 :fire:  Official implementation of "Adversarial Supervision Makes Layout-to-Image Diffusion Models Thrive" (ICLR 2024)
@@ -29,7 +30,7 @@ Pretrained models [ade20k_step9.ckpt](https://huggingface.co/Yumeng/ALDM/blob/ma
 
 ## Dataset Preparation
 
-Datasets should be structured as follows to enable ALDM training. Dataset path should be adjusted accordingly in [dataloader/cityscapes.py](https://github.com/boschresearch/ALDM/blob/3edbad80eaf208eacd0eb4a161a4998a0c75fb50/dataloader/cityscapes.py#L151-L152) and [dataloader/ade20k.py](https://github.com/boschresearch/ALDM/blob/3edbad80eaf208eacd0eb4a161a4998a0c75fb50/dataloader/ade20k.py#L144-L145).
+Datasets should be structured as follows to enable ALDM training. Dataset path should be adjusted accordingly in [dataloader/cityscapes.py](https://github.com/boschresearch/ALDM/blob/3edbad80eaf208eacd0eb4a161a4998a0c75fb50/dataloader/cityscapes.py#L151-L152),  [dataloader/ade20k.py](https://github.com/boschresearch/ALDM/blob/3edbad80eaf208eacd0eb4a161a4998a0c75fb50/dataloader/ade20k.py#L144-L145) and [dataloader/coco_stuff.py](https://github.com/boschresearch/ALDM/blob/dc9ed8cdd4787485db2ab07c3b104361af04d0d3/dataloader/coco_stuff.py#L132-L133). Check [convert_coco_stuff_id.ipynb](https://github.com/boschresearch/ALDM/blob/main/convert_coco_stuff_id.ipynb) for converting coco stuff labels. 
 
 <details>
   <summary>Click to expand</summary>
@@ -50,6 +51,13 @@ datasets
 │   └── images
 │       ├── train 
 │       └── val 
+├── COCOStuff
+│   ├── train_img
+│   ├── val_img
+│   ├── train_label
+│   ├── val_label
+│   ├── train_label_convert # New: after converting
+│   └── val_label_convert # New: after converting
 └── ...
 ```
 </details>
