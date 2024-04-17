@@ -129,12 +129,13 @@ class COCO_Stuff(data.Dataset):
             self.augment_p = augment_dict['augment_p']
 
         # get image list
-        self.datapth = f'/fs/scratch/rng_cr_bcai_dl_students/OpenData/cocostuff/{mode}_label_convert'
-        self.rgb_path = f'/fs/scratch/rng_cr_bcai_dl_students/OpenData/cocostuff/{mode}_img'
+        self.datapth = f'/fs/scratch/rng_cr_bcai_dl_students/OpenData/LOCKED/coco/cocostuff/{mode}_label_convert' # Change path here!
+        self.rgb_path = f'/fs/scratch/rng_cr_bcai_dl_students/OpenData/LOCKED/coco/cocostuff/{mode}_img' # Change path here!
 
         # TODO: Read captions
-        if caption_json is None:
-            caption_json = f'/home/lyu7rng/datasets/cocostuff/new_caption/{mode}_caption_full.json'
+        if caption_json is None: 
+            cur_path = os.path.dirname(__file__)
+            caption_json = os.path.join(cur_path, f'coco_caption_{mode}.json')
         with open(caption_json, 'r') as json_file:
             self.caption_dict = json.load(json_file)
 
