@@ -1,6 +1,4 @@
 
-
-
 # Adversarial Supervision Makes Layout-to-Image Diffusion Models Thrive (ALDM)   
 
 :fire:  Official implementation of "Adversarial Supervision Makes Layout-to-Image Diffusion Models Thrive" (ICLR 2024)
@@ -79,6 +77,57 @@ We provide three ways for testing: (1) [JupyterNotebook](demo_generation.ipynb),
 
 3. [Bash scripts](bash_script): we provide some bash scripts to enable large scale generation for the whole dataset. The synthesized data can be further used for training downstream models, e.g., semantic segmentation networks.
 
+## Training
+Example training bash scripts for Cityscapes and ADE20K training can be found here: [bash_script/train_cityscapes.sh](bash_script/train_cityscapes.sh), [bash_script/train_ade20k.sh](bash_script/train_ade20k.sh).
+
+The main entry script is [train_cldm_seg_pixel_multi_step.py](train_cldm_seg_pixel_multi_step.py), and YAML configuration files can be found under `models` folder, e.g., [models/cldm_seg_cityscapes_multi_step_D.yaml](models/cldm_seg_cityscapes_multi_step_D.yaml). 
+
+### How to train on a new dataset?      
+
+To train on a new customized dataset, one may need to change the following places:
+1. Define a new dataset class and add it to the [dataloader/\_\_init\_\_.py](dataloader/__init__.py), cf. [dataloader/cityscapes.py](dataloader/cityscapes.py), where semantic classes need to be defined accordingly. The class language embedding, e.g., [class_embeddings_cityscapes.pth](models/class_embeddings_cityscapes.pth) can be generated using CLIP text encoder with a pre-defined prompt template, e.g., "A photo of {class_name}", which will produce embeddings of shape (N, 768), where N is the number semantic classes. 
+> Note that, the class language embedding is not mandatory for the training. It doesn't impact the final performance, while we observe it can accelerate the training convergence, compared to the simple RGB-color coding.  
+2. The captions of images, e.g., [dataloader/ade20k_caption_train.json](dataloader/ade20k_caption_train.json), can be obtained by vision-language models like [BLIP](https://github.com/salesforce/LAVIS?tab=readme-ov-file#image-captioning) and [LLaVA](https://github.com/haotian-liu/LLaVA).   
+3. Adjust the segmenter-based discriminator, cf. [cldm_seg/seg/ade_upernet101_20cls.yaml](cldm_seg/seg/ade_upernet101_20cls.yaml). Similar to the initialization in ControlNet [here](https://github.com/lllyasviel/ControlNet/blob/main/tool_add_control.py), one would need to manually match the semantic classes between the customized dataset and the pretrained segmenter. If there are new classes, where the pretrained segmenter wasn't trained on, one can simply  initialize the weights randomly.  Check out the example code snippet below, where a ADE20K pretrained UperNet is adjusted for Cityscapes. 
+> Note that,  essentially we update the generator and discriminator jointly during training, using a pretrained segmenter as initiliaztion can help to make the adversarial training more stable. So that's why the segmenter doesn't have to be trained on the same dataset. 
+
+<details>
+  <summary>Click to expand</summary>
+  
+``` python
+    ### Cityscapes
+    try:
+        model = ADESegDiscriminator(segmenter_type='upernet101_20cls')
+        # model.load_pretrained_segmenter()
+    except:
+        pass
+    select_index = torch.tensor([6, 11, 1, 0, 32, 93, 136, 43, 72, 9, 2, 12, 150, 20, 83, 80, 38, 116, 128, 150]).long()
+    
+    old_model = ADESegDiscriminator(segmenter_type='upernet101')
+    old_model.load_pretrained_segmenter()
+    
+    target_dict = {}
+    
+    for k, v in old_model.state_dict().items():
+        print(k, v.shape)
+        if 'conv_last.1.' in k:
+            new_v = torch.zeros((20,) + v.shape[1:]).to(v.device)
+            print(new_v.shape)
+            new_v = torch.index_select(v, dim=0, index=select_index)
+            new_v[12] = torch.randn_like(new_v[12])
+            target_dict[k] = new_v
+        else:
+            target_dict[k] = v
+    
+    model.load_state_dict(target_dict, strict=True)
+    output_path = './pretrained/ade20k_semseg/upernet101/decoder_epoch_50_20cls.pth'
+    torch.save(model.state_dict(), output_path)
+```
+</details>
+
+> If an error occured due to the segmenter, e.g., "got an unexpected keyword argument 'is_inference'", check this issue [here](https://github.com/boschresearch/ALDM/issues/11).
+
+> The above might not be a complete list of items need to be adjusted. Please don't hesitate to open issues in case of doubts. I will update the instruction accordingly to make it clearer.
 
 ## Citation
 If you find our work useful, please star  this repo and cite: 
